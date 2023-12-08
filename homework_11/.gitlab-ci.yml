@@ -1,0 +1,14 @@
+stages:
+  - test
+
+test:
+  stage: test
+  image: python:latest
+  before_script:
+    - pip install -r requirements.txt
+  script:
+    - python manage.py test
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      when: always
+    - when: manual
